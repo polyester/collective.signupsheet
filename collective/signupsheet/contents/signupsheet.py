@@ -3,7 +3,7 @@
 from Products.Archetypes.atapi import (IntegerField, StringWidget,
                                        BooleanField, BooleanWidget,
                                        DateTimeField, CalendarWidget,
-                                       TextField, RichWidget,
+                                       TextField, RichWidget, TextAreaWidget, StringField, LinesField, LinesWidget, MultiSelectionWidget,
                                        Schema)
 from Products.ATContentTypes.content.base import registerATCT
 from Products.ATContentTypes.content.folder import ATFolder
@@ -58,6 +58,55 @@ SignupSheetSchema = FormFolderSchema.copy() + Schema((
                           default=u"Choose to show in the subscription page the number of seats left",)
             )
         ),
+    LinesField('speakers',
+        searchable=True,
+        widget=LinesWidget(
+            label=_('field_speakers', default=u'Speakers'),
+            description=_('fieldhelp_speakers',
+                          default=u"The speaker or speakers; one per line",)
+            )
+        ),
+    StringField('facilitator',
+        searchable=True,
+        widget=StringWidget(
+            label=_('field_facilitator', default=u'Facilitator'),
+            description=_('fieldhelp_facilitator',
+                          default=u"The facilitator",)
+            )
+        ),
+    StringField('organizer',
+        searchable=True,
+        widget=StringWidget(
+            label=_('field_organizer', default=u'Organizer'),
+            description=_('fieldhelp_organizer',
+                          default=u"The organizer",)
+            )
+        ),
+    LinesField('theme',
+        searchable=True,
+        widget=MultiSelectionWidget(
+            label=_('field_theme', default=u'Theme'),
+            description=_('fieldhelp_theme',
+                          default=u"Theme",),
+            format='checkbox',
+
+            ),
+        multivalued=1,
+        vocabulary=['Wages','Employment relationships','Worker safety','Future structure']
+        ),
+    LinesField('cross_cutting_issue',
+        searchable=True,
+        widget=MultiSelectionWidget(
+            label=_('field_cross_cutting_issue', default=u'Cross cutting issue'),
+            description=_('fieldhelp_cross_cutting_issue',
+                          default=u"Cross cutting issue",),
+            format='checkbox',
+
+            ),
+        multivalued=1,
+        vocabulary=['Gender','Freedom of Association','Global Bargaining','Migrants']
+        ),
+
     DateTimeField('startDate',
         required=False,
         searchable=False,
@@ -122,7 +171,12 @@ SignupSheetSchema = FormFolderSchema.copy() + Schema((
         ),
 ))
 
-SignupSheetSchema.moveField('eventsize', after='description')
+SignupSheetSchema.moveField('speakers', after='description')
+SignupSheetSchema.moveField('facilitator', after='speakers')
+SignupSheetSchema.moveField('organizer', after='facilitator')
+SignupSheetSchema.moveField('theme', after='organizer')
+SignupSheetSchema.moveField('cross_cutting_issue', after='theme')
+SignupSheetSchema.moveField('eventsize', after='cross_cutting_issue')
 SignupSheetSchema.moveField('waitlist_size', after='eventsize')
 SignupSheetSchema.moveField('display_size_left', after='waitlist_size')
 SignupSheetSchema.moveField('startDate', after='display_size_left')

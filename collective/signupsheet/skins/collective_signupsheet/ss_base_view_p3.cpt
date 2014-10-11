@@ -87,6 +87,48 @@
                    tal:condition="here/Description">
                     Description
                 </p>
+                <div
+                   tal:define="spkrs here/getSpeakers|nothing"
+                   tal:condition="spkrs">
+                    <b>Speakers: </b>
+                    <span tal:repeat="spkr spkrs">
+                      <span tal:replace="spkr">Speaker name</span>
+                      <span class="separator"
+                       tal:condition="not: repeat/spkr/end" tal:replace="string:, " />
+                      </span>
+                </div>
+                <div tal:condition="here/getFacilitator">
+                     <b>Facilitator: </b>
+                     <span tal:content="here/getFacilitator"></span>
+                </div>
+                <div tal:condition="here/getOrganizer">
+                     <b>Organizer: </b>
+                     <span tal:content="here/getOrganizer"></span>
+                </div>
+ <br />  <br />
+                <div
+                   tal:define="themes here/getTheme|nothing"
+                   tal:condition="themes">
+                    <b>Theme(s): </b>
+                    <span tal:repeat="theme themes">
+                      <span tal:replace="theme">Theme </span>
+                      <span class="separator"
+                       tal:condition="not: repeat/theme/end" tal:replace="string:, " />
+                      </span>
+                </div>
+
+                <div
+                   tal:define="issues here/getCross_cutting_issue|nothing"
+                   tal:condition="issues">
+                    <b>Cross cutting issue(s): </b>
+                    <span tal:repeat="issue issues">
+                      <span tal:replace="issue">Issue </span>
+                      <span class="separator"
+                       tal:condition="not: repeat/issue/end" tal:replace="string:, " />
+                      </span>
+                </div>
+
+                  <br /> <b>Workshop description</b><br />
                 <div id="body-text" tal:content="structure context/getBodyText"/>
                 <div tal:condition="python: context.start() and context.end()"
                      id="signupsheet_date" i18n:domain="plone">

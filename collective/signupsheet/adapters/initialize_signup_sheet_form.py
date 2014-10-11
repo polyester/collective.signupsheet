@@ -42,7 +42,7 @@ class InitializeSignupSheetForm(object):
             obj.fgField.__name__ = 'name'
 
             obj.setTitle(translate(
-                         _(u'signupsheet_namefield_title', u'Your Name'),
+                         _(u'signupsheet_namefield_title', u'Given Name'),
                          context=self.form.REQUEST))
             obj.setFgTDefault('here/@@default_name_value')
             self.form._pfFixup(obj)
@@ -52,7 +52,7 @@ class InitializeSignupSheetForm(object):
             obj = self.form['surname']
             obj.fgField.__name__ = 'surname'
             obj.setTitle(translate(
-                        _(u'signupsheet_surnamefield_title', u'Your surname'),
+                        _(u'signupsheet_surnamefield_title', u'Surname'),
                         context=self.form.REQUEST))
             obj.setFgTDefault('here/@@default_surname_value')
             self.form._pfFixup(obj)
@@ -114,9 +114,7 @@ class InitializeSignupSheetForm(object):
     Thank you for registering to <tal:title tal:replace="here/aq_inner/aq_parent/Title"/>
 </p>
 
-<p tal:condition="request/review_state|nothing">Your registration state is:
-    <tal:review_state tal:replace="request/review_state" />
-</p>
+
 
 <p>You provided these informations:</p>"""),
                                 context=self.form.REQUEST),)
