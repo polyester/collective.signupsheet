@@ -106,6 +106,18 @@ SignupSheetSchema = FormFolderSchema.copy() + Schema((
         multivalued=1,
         vocabulary=['Gender','Freedom of Association','Global Bargaining','Migrants']
         ),
+    LinesField('workshop_type',
+        searchable=True,
+        widget=MultiSelectionWidget(
+            label=_('field_workshop_type', default=u'Workshop Type'),
+            description=_('fieldhelp_workshop_type',
+                          default=u"Workshop Type",),
+            format='checkbox',
+
+            ),
+        multivalued=1,
+        vocabulary=['Plenary','Topical','Regional','Social']
+        ),
 
     DateTimeField('startDate',
         required=False,
@@ -176,7 +188,8 @@ SignupSheetSchema.moveField('facilitator', after='speakers')
 SignupSheetSchema.moveField('organizer', after='facilitator')
 SignupSheetSchema.moveField('theme', after='organizer')
 SignupSheetSchema.moveField('cross_cutting_issue', after='theme')
-SignupSheetSchema.moveField('eventsize', after='cross_cutting_issue')
+SignupSheetSchema.moveField('workshop_type', after='cross_cutting_issue')
+SignupSheetSchema.moveField('eventsize', after='workshop_type')
 SignupSheetSchema.moveField('waitlist_size', after='eventsize')
 SignupSheetSchema.moveField('display_size_left', after='waitlist_size')
 SignupSheetSchema.moveField('startDate', after='display_size_left')

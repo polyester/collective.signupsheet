@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-
+from AccessControl import Unauthorized
+from Acquisition import aq_inner, aq_parent
 from Products.Five.browser import BrowserView
 from Products.CMFCore.utils import getToolByName
 from Products.Archetypes.utils import shasattr
@@ -75,6 +76,36 @@ class PfgFormUtilities(BrowserView):
         member = getToolByName(self, 'portal_membership').getAuthenticatedMember()
         return member.getProperty('email') or ''
 
+    def default_organization_value(self):
+        """
+        get default organization for the form field
+        """
+        return ''
+
+
+    def default_ss_title_value(self):
+        """
+        get default ss_title for the form field
+        """
+        context = self.context
+        sstitle = aq_parent(aq_inner(context)).Title()
+        return sstitle.decode('utf-8')
+
+    def default_ss_start_value(self):
+        """
+        get default ss_start for the form field
+        """
+        context = self.context
+        ssstart = aq_parent(aq_inner(context)).start()
+        return ssstart.strftime('%Y-%m-%d %H:%M %a %d %b')
+
+    def default_ss_url_value(self):
+        """
+        get default ss_url for the form field
+        """
+        context = self.context
+        ssurl = aq_parent(aq_inner(context)).absolute_url()
+        return ssurl
 
 class PfgPublicFormUtilities(BrowserView):
 

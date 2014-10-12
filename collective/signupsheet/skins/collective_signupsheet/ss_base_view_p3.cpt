@@ -127,7 +127,16 @@
                        tal:condition="not: repeat/issue/end" tal:replace="string:, " />
                       </span>
                 </div>
-
+                <div
+                   tal:define="workshoptypes here/getWorkshop_type|nothing"
+                   tal:condition="workshoptypes">
+                    <b>Workshop Type: </b>
+                    <span tal:repeat="workshoptype workshoptypes">
+                      <span tal:replace="workshoptype">Workshoptype </span>
+                      <span class="separator"
+                       tal:condition="not: repeat/workshoptype/end" tal:replace="string:, " />
+                      </span>
+                </div>
                   <br /> <b>Workshop description</b><br />
                 <div id="body-text" tal:content="structure context/getBodyText"/>
                 <div tal:condition="python: context.start() and context.end()"
@@ -152,7 +161,7 @@
                   tal:condition="python: not view.getSignupStatus() =='full'">
                 <div>
 
-                  <div id="registration-closed" 
+                  <div id="registration-closed"
                        tal:condition="python: wf_state == 'closed'">
                       <strong i18n:translate="">The registration is closed</strong>
                   </div>
@@ -167,7 +176,7 @@
                       </p>
                          <form method="post" action="#"
                                tal:attributes="action context/absolute_url">
-                              <input type="submit" value="" 
+                              <input type="submit" value=""
                                      tal:attributes="value view/getSignupMessage"
                                      name="formsubscribe"/>
                          </form>
@@ -175,7 +184,7 @@
 
                 </div>
               </div>
-              <div id="ss-registration-full" 
+              <div id="ss-registration-full"
                    tal:condition="python:view.getSignupStatus() == 'full' ">
                       <strong i18n:translate="text_registration_full">Registration is full</strong>
               </div>
@@ -197,7 +206,7 @@
             </tal:if>
 
             <metal:use_body use-macro="body_macro" />
-            
+
             <tal:if tal:condition="here/getFormEpilogue | nothing">
               <metal:field use-macro="python:context.widget('formEpilogue', mode='view')">
                   Body text

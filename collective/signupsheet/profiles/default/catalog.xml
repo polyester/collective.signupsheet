@@ -15,4 +15,7 @@
   <index name="hk14_cross_cutting_issue" meta_type="KeywordIndex">
   <indexed_attr value="cross_cutting_issue"/>
  </index>
+  <index name="hk14_workshop_type" meta_type="KeywordIndex">
+  <indexed_attr value="workshop_type"/>
+ </index>
 </object>
