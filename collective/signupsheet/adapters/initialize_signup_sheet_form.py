@@ -9,7 +9,9 @@ from collective.signupsheet.interfaces import ISignupSheetInitializer
 from zope.component import adapts
 from zope.interface import implements
 from zope.i18n import translate
-
+from Acquisition import aq_inner
+from plone.app.discussion.browser.conversation import ConversationView
+old_enabled = ConversationView.enabled
 
 class InitializeSignupSheetForm(object):
     adapts(ISignupSheet)
@@ -173,3 +175,12 @@ class InitializeSignupSheetForm(object):
             self.form.addActionAdapter('registrants')
             self.form.addActionAdapter('manager_notification_mailer')
             self.form.thanksPage = 'thank-you'
+
+
+
+
+def enabled(self):
+    parent = aq_inner(self.__parent__)
+    if parent.portal_type == 'Signup Sheet':
+        return True
+    return old_enabled(self)

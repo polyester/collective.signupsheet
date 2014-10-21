@@ -61,9 +61,9 @@ SignupSheetSchema = FormFolderSchema.copy() + Schema((
     LinesField('speakers',
         searchable=True,
         widget=LinesWidget(
-            label=_('field_speakers', default=u'Speakers'),
+            label=_('field_speakers', default=u'Input people'),
             description=_('fieldhelp_speakers',
-                          default=u"The speaker or speakers; one per line",)
+                          default=u"The input people; one per line",)
             )
         ),
     StringField('facilitator',

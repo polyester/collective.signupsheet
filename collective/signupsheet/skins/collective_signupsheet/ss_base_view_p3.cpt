@@ -82,7 +82,7 @@
                 <h1 tal:content="context/Title" class="documentFirstHeading">
                   Title or id
                 </h1>
-                <p class="documentDescription"
+                <p
                    tal:content="here/Description"
                    tal:condition="here/Description">
                     Description
@@ -90,7 +90,7 @@
                 <div
                    tal:define="spkrs here/getSpeakers|nothing"
                    tal:condition="spkrs">
-                    <b>Speakers: </b>
+                    <b>Input people: </b>
                     <span tal:repeat="spkr spkrs">
                       <span tal:replace="spkr">Speaker name</span>
                       <span class="separator"
@@ -127,16 +127,7 @@
                        tal:condition="not: repeat/issue/end" tal:replace="string:, " />
                       </span>
                 </div>
-                <div
-                   tal:define="workshoptypes here/getWorkshop_type|nothing"
-                   tal:condition="workshoptypes">
-                    <b>Workshop Type: </b>
-                    <span tal:repeat="workshoptype workshoptypes">
-                      <span tal:replace="workshoptype">Workshoptype </span>
-                      <span class="separator"
-                       tal:condition="not: repeat/workshoptype/end" tal:replace="string:, " />
-                      </span>
-                </div>
+
                   <br /> <b>Workshop description</b><br />
                 <div id="body-text" tal:content="structure context/getBodyText"/>
                 <div tal:condition="python: context.start() and context.end()"
@@ -213,6 +204,7 @@
               </metal:field>
             </tal:if>
         </tal:subscription-form>
+
 
       </metal:main>
     </metal:fill>
