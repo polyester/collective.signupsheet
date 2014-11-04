@@ -128,7 +128,7 @@
                       </span>
                 </div>
 
-                  <br /> <b>Workshop description</b><br />
+                  <br /> <b>Description:</b><br />
                 <div id="body-text" tal:content="structure context/getBodyText"/>
                 <div tal:condition="python: context.start() and context.end()"
                      id="signupsheet_date" i18n:domain="plone">
