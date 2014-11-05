@@ -116,7 +116,7 @@ SignupSheetSchema = FormFolderSchema.copy() + Schema((
 
             ),
         multivalued=1,
-        vocabulary=['Plenary','Topical','Regional','Social']
+        vocabulary=['Plenary','Topical','Regional','Social','Side meeting']
         ),
 
     DateTimeField('startDate',
